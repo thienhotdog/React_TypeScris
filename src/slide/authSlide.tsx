@@ -1,18 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router";
 import { signin } from "../api/auth";
 import {  authenticate } from "../auth/util";
 import { User } from "../model/user";
-interface Auth {
+
+
+interface Cart {
     user: [],
-    isAuthenticated: false,
     loading: boolean
 }
 const initialState = {
     user: [],
-    isAuthenticated: false,
     loading: false
-} as Auth
+} as Cart
 
 
 
@@ -34,7 +33,7 @@ export const signins = createAsyncThunk(
 
 const authSlide = createSlice({
     name: 'user',
-    initialState: {loading: false,user:[]},
+    initialState,
     reducers: {
     },
     extraReducers: (builder) => {

@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router';
 const { Sider, Content } = Layout;
 const Shop: React.FC = () =>{
     const product = useSelector((state:any) =>state.product.product);
+    console.log(product);
     const dispatch = useDispatch();
     const {user} = isAuthenticated();
     useEffect(() =>{
@@ -27,7 +28,7 @@ const Shop: React.FC = () =>{
     const category = useSelector((state:any) => state.category.category);
     useEffect(() =>{
         dispatch(getAll())
-    },[])
+    },[dispatch])
 
     const onHandleSort = async (e:any) => {
         let {min,max} = e.target.dataset;
@@ -38,6 +39,7 @@ const Shop: React.FC = () =>{
 
    const onHandleFildProduct = async (e:any) =>{
         const id = e.target.dataset.id;
+        console.log(e);
         dispatch(getCateProduct(id))
    }
 
@@ -69,8 +71,7 @@ const Shop: React.FC = () =>{
                         <span> --- </span>
                             <a href="/shop">Shop</a>
                             <div className="shop">
-                                <input placeholder="nhập tên sản phẩm" onBlur={e => onHandleSearch(e)} />
-                                <p className="shop_title">loại sản phẩm</p>
+                                <p className="shop_title mt-3">Danh Mục Sản Phẩm</p>
                                 <div>
                                     <ul className="shop_option">
                                         {category.map((item:Category,index:number) =>{
@@ -102,7 +103,10 @@ const Shop: React.FC = () =>{
                     </div>
                 </Sider>
                 <Content style={{backgroundColor: 'white'}}>
-                    <Row className="shop container" gutter={[16, 24]}>
+                    <div style={{"display":"flex", "justifyContent":"end", "paddingRight":"40px"}} className='mt-1'>
+                        <input  style={{"padding":"10px 40px 10px 10px"}} placeholder="Nhập Tên Sản Phẩm" onBlur={e => onHandleSearch(e)} />
+                    </div>
+                    <Row className="shop container mt-3" gutter={[16, 24]}>
                         {product.map((item:IProduct, index:number) =>{
                             return <Col className="gutter-row shop-" key={index} span={6}>
                             <Card
@@ -111,7 +115,7 @@ const Shop: React.FC = () =>{
 
                             >
                                 <Link to={`/product/${item._id}`}>
-                                    <img src={item.img} />
+                                    <img style={{"maxWidth":"100%"}} src={item.img} />
                                 </Link>
                                 <p className="py-2">{item.name}</p>
                                 <p><span>Giá : </span>{item.price} VNĐ</p>
@@ -134,7 +138,7 @@ const Shop: React.FC = () =>{
                         </Col>
                             
                         })}
-                        {product.length==0 && <p>không tìm thấy sản phẩm</p>}
+                        {product.length === 0 && <p>không tìm thấy sản phẩm</p>}
                     </Row>
                 </Content>
             </Layout>

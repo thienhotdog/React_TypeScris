@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Category } from "../../../model/category";
 import { getAll, removeCategory } from "../../../slide/categorySlide";
+import { Table } from 'antd';
+import { Category } from "../../../model/category";
 const ListCategory: React.FC = () => {
     const category = useSelector((state:any) => state.category.category);
     const dispatch = useDispatch();
@@ -10,11 +11,29 @@ const ListCategory: React.FC = () => {
         dispatch(getAll())
     },[])
     const handRemove = (slug:string) =>{
-        const isConfirm = window.confirm("bạn có muốn xóa không ?");
+        const isConfirm = window.confirm("bạn có chắc chắn muốn xóa danh mục này không ?");
         if(isConfirm){
           dispatch(removeCategory(slug))
         }
       }
+    const columns = [
+        {
+            title: "Tên Danh Mục",
+            dataIndex: "name",
+            key:"name"
+        },
+        {
+            title: "action",
+            dataIndex: "action",
+            key: "action",
+            render: (text: string, item:Category) => (
+              <div>
+                <Link to={`/admin/category/${item.slug}`} className="btn btn-primary" style={{"marginRight":"15px"}}>Edit</Link>
+                <button onClick={() => handRemove(item.slug)} className="btn btn-danger">Delete</button>
+              </div>
+            ),
+          },
+    ]
     return (
         <div>
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -26,7 +45,7 @@ const ListCategory: React.FC = () => {
                 </div>
             </div>
             <div className="table-responsive">
-                <table className="table table-dark">
+                {/* <table className="table table-dark">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -46,7 +65,16 @@ const ListCategory: React.FC = () => {
                             </tr>
                         ))}
                     </tbody>
-                </table>
+                </table> */}
+
+
+                <Table
+                    pagination = {false}
+                    dataSource={category}
+                    columns={columns}
+                    rowKey={category => category._id}
+                />
+                
             </div>
         </div>
     )

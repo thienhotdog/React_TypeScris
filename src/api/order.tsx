@@ -15,3 +15,8 @@ export const get = (_id:number) =>{
     const url = `/order/${_id}`;
     return instance.get(url)
 }
+
+export const edit = (item:Order) =>{
+    const url = `/order/${item._id}`;
+    return instance.patch(url,item)
+}

@@ -57,6 +57,7 @@ const cartSlide = createSlice({
         },
         clearCartQuantity(state, action){
             state.cartQuantity = 0;
+            localStorage.removeItem('cartItems')
         }
     }
 

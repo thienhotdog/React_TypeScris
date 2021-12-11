@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { isAuthenticated } from "../../auth/util";
-import { clearCartQuantity, getTotals } from "../../slide/cartSlide";
+import { clearCart, getTotals } from "../../slide/cartSlide";
 import { addOrder } from "../../slide/order";
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router";
@@ -32,10 +32,11 @@ const CheckOut = () => {
         }
         console.log(newProduct);
         dispatch(addOrder(newProduct));
+        dispatch(clearCart({}));
         toast("đặt hàng thành công",{
             onClose: () =>navigate("/")
         });
-        dispatch(clearCartQuantity({}))
+
     }
     const {user} = isAuthenticated();
     return (

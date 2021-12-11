@@ -26,7 +26,6 @@ const ShopCart:React.FC = () => {
         const isConfirm = window.confirm("bạn có muốn xóa không ?");
         if(isConfirm){
            dispatch(clearCart({}))
-            // localStorage.removeItem("cartItems")
         }
     }
     return (
@@ -58,8 +57,8 @@ const ShopCart:React.FC = () => {
                             {cart.cartItems.map((item:IProduct, index:number) => (
                                 <tr key={index}>
                                     <td><img src={item.img} style={{ width: 160 }} /></td>
-                                    <td>{item.price}</td>
-                                    <td className="cart-product-quantity">
+                                    <td style={{"paddingTop":"66px"}}>{item.price}</td>
+                                    <td className="cart-product-quantity" style={{"paddingTop":"66px"}}>
                                         <button className="btn btn-danger" style={{ "padding": "0px 5px 0px 5px" }}
                                             onClick={() => handleDecreaseCart(item)}
                                         >-</button>
@@ -68,8 +67,8 @@ const ShopCart:React.FC = () => {
                                             onClick={() => handlIncreaseCart(item)}
                                         >+</button>
                                     </td>
-                                    <td>{item.price * item.cartQuantity} VNĐ</td>
-                                    <td>
+                                    <td style={{"paddingTop":"66px"}}>{item.price * item.cartQuantity} VNĐ</td>
+                                    <td style={{"paddingTop":"66px"}}>
                                         <button className="btn btn-danger" onClick={() => handleRemoveCart(item)}>Delete</button>
                                     </td>
                                 </tr>

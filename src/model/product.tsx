@@ -10,5 +10,7 @@ export interface IProduct  {
     address: string,
     status: string,
     updatedAt: string,
-    amount: number
+    amount: number,
+    desc: string,
+    createdAt: Date
 }

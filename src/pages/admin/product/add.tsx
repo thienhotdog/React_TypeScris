@@ -14,7 +14,8 @@ type FormValues = {
     name: string,
     price: number,
     img: string,
-    cateId: string
+    cateId: string,
+    desc: string
 };
 
 const resolver: Resolver<FormValues> = async (values) => {
@@ -23,6 +24,22 @@ const resolver: Resolver<FormValues> = async (values) => {
         errors: !values.name
             ? {
                 name: {
+                    type: "required",
+                    message: "This is required."
+                },
+                price: {
+                    type: "required",
+                    message: "This is required."
+                },
+                img: {
+                    type: "required",
+                    message: "This is required."
+                },
+                cateId: {
+                    type: "required",
+                    message: "This is required."
+                },
+                desc: {
                     type: "required",
                     message: "This is required."
                 }
@@ -84,15 +101,28 @@ const Addproduct: React.FC = () => {
         <div>
             <ToastContainer />
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" className="form-control" {...register("name", { required: true })} placeholder="tên sản phẩm" />
-                {errors.name && <span>bắt buộc phải nhập trường hợp này</span>}
+                <div>
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" {...register("name", { required: true })} placeholder="tên sản phẩm" />
+                </div>
+                {errors.name && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
                 <br />
-                <input type="number" className="form-control"  {...register("price", { required: true })} placeholder="giá" />
-                {errors.price && <span>bắt buộc phải nhập trường hợp này</span>}
-                <br />
-                <input type="file" {...register("img", { required: true })} placeholder="ảnh" />
-                {errors.img && <span>bắt buộc phải nhập trường hợp này</span>}
-                <br />
+               <div className="mb-3">
+                    <label className="form-label">Price</label>
+                    <input type="number" className="form-control"  {...register("price", { required: true })} placeholder="giá" />
+               </div>
+                {errors.price && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+               <div className="mb-3">
+                    <label className="form-label">Ảnh</label>
+                    <br />
+                    <input type="file" {...register("img", { required: true })} placeholder="ảnh" />
+               </div>
+                {errors.img && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+                <div className="mb-3">
+                    <label className="form-label">Mô tả</label>
+                    <input type="text" className="form-control" {...register("desc", { required: true })} />
+               </div>
+               {errors.desc && <span>bắt buộc phải nhập trường hợp này</span>}
                 <div className="mb-3">
                     <label className="form-label">CateId</label>
                     <select className="form-control" {...register("cateId")}>
@@ -100,11 +130,10 @@ const Addproduct: React.FC = () => {
                             <option value={item._id} key={index}>{item.name}</option>
                         ))}
                     </select>
-                    {errors.name && <span className="d-block mt-2 text-danger">
-                        Bắt buộc phải ấy link nhập trường này</span>}
-
                 </div>
-                <button >Thêm</button>
+                {errors.cateId && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+                <br/>
+                <button className="btn btn-primary">Thêm</button>
             </form>
         </div>
     )

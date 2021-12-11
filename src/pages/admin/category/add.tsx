@@ -43,7 +43,7 @@ const AddCategory: React.FC = () => {
         });
         if(check == 0){
             dispatch(addCategory(data));
-            toast("thêm thành công",{
+            toast("thêm danh mục thành công",{
                 onClose: () =>navigate("/admin/Category")
             });
         }else{
@@ -56,10 +56,11 @@ const AddCategory: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-3">
                     <label className="form-label">Tên Danh Mục</label>
-                    <input type="text" className="form-control" {...register("name", { required: true })} />
-                    {errors.name && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
                     <br />
+                    <input type="text" className="form-control" {...register("name", { required: true })} />
                 </div>
+                {errors.name && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+                <br />
                 <button className="btn btn-primary" >Thêm</button>
             </form>
         </div>

@@ -15,7 +15,7 @@ const ProductDetailPage :React.FC = ()=>{
     const disPatch = useDispatch();
     useEffect(() =>{
         disPatch(fetchProducts())
-    },[])
+    },[disPatch])
     const {id} = useParams();
     useEffect(() =>{
         const getProduct = async (id:any) =>{

@@ -22,6 +22,7 @@ const resolver: Resolver<FormValues> = async (values) => {
             : {}
     };
 };
+
 const EditCategory: React.FC = () => {
     const { slug } = useParams();
     const categories = useSelector((state: any) => state.category.category);
@@ -36,12 +37,9 @@ const EditCategory: React.FC = () => {
         reset
     } = useForm<FormValues>({ resolver });
 
-    const [category, setCategory] = useState<Category[]>([]);
     useEffect(() => {
         const getCategory = async (slug: any) => {
             const { data } = await get(slug)
-            console.log(data[0]);
-            setCategory(data[0]);
             reset(data[0])
         };
         getCategory(slug)

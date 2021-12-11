@@ -108,7 +108,6 @@ const productSlide = createSlice({
     name: 'product',
     initialState,
     reducers: {
-      // fill in primary logic here
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProducts.fulfilled, (state, action) => {

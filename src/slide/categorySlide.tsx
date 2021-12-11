@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { edit, getAllCategory, remove, add } from "../api/category";
+import { edit, getAllCategory, remove, add, get } from "../api/category";
 import { Category } from "../model/category";
 
 
@@ -65,6 +65,13 @@ export const removeCategory = createAsyncThunk(
   }
 )
 
+export const getCategory = createAsyncThunk(
+  'category/getcategory',
+  async (slug:string) =>{
+    const {data} = await get(slug);
+    console.log(data);
+  }
+)
 
 
 

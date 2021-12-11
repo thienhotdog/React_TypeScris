@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { authenticate, isAuthenticated } from "../../auth/util";
-import { Link, Navigate } from "react-router-dom";
+import { isAuthenticated } from "../../auth/util";
+import { Navigate } from "react-router-dom";
 import { User } from "../../model/user";
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
@@ -25,39 +25,38 @@ const Signin: React.FC = () => {
       if (user && user.role === 1) {
         return <Navigate to="/admin" />;
       }
-      if (user != undefined) {
+      if (user !== undefined) {
         return <Navigate to="/" />;
       } 
   };
   return (
-    <div className="col-6 mx-auto mt-2">
+    <div className="wrapper fadeInDown" style={{"paddingTop":"80px"}}>
+    <ToastContainer />
+    <div id="formContent">
       {redirectUser()}
-      <ToastContainer />
       <h2> Đăng nhập</h2>
       <hr />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-floating">
-          <input type="email" className="form-control" {...register("email", { required: true })} />
-          <label >Email</label>
-        </div>
-        <br />
-        {errors.email && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
-        <div className="form-floating">
-          <input type="password" className="form-control" {...register("password", { required: true })} />
-          <label >Password</label>
-        </div>
-        <br />
-        {errors.password && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
-        <div className="checkbox mb-3">
-          <label>
-            <input type="checkbox" /> Remember
-          </label>
-        </div>
-        <button className="w-100 btn btn-lg btn-primary" type="submit">Đăng Nhập</button>
-        <Link className="w-100 btn btn-lg btn-primary mt-3" to="/signup" >Về Đăng Ký</Link>
-        <Link className="w-100 btn btn-lg btn-primary mt-3" to="/" >Về Trang Chủ</Link>
+          <div>
+            <label >Email</label>
+            <br/>
+            <input type="email" className="input" {...register("email", {required : true})} />
+          </div>
+          <br/>
+          {errors.email && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+          <div>
+            <label >Password</label>
+            <br/>
+            <input type="password" className="input" {...register("password", {required : true})} />
+           
+          </div>
+            <br/>
+          {errors.password && <span className="text-danger">bắt buộc phải nhập trường hợp này</span>}
+          <br/>
+          <button type="submit" className="fadeIn fourth btn btn-primary" style={{"marginBottom":"20px"}}>Đăng Nhập</button>
       </form>
     </div>
+  </div>
   );
 };
 

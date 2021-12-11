@@ -34,7 +34,6 @@ type FormValues = {
   const EditProduct: React.FC = () => {
     //Sử dụng hook useParams để lấy ID từ url
     const { id } = useParams();
-    const [product ,setProdut] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {
@@ -51,7 +50,6 @@ type FormValues = {
         const getProduct = async (id:any) =>{
             try{
                 const {data} = await get(id);
-                setProdut(data[0]);
                 console.log(data[0])
                 reset(data[0])
             }catch(error){
@@ -73,15 +71,15 @@ type FormValues = {
             getDownloadURL(UploadTask.snapshot.ref).then((url) => {
               data.img = url;
               dispatch(editProduct(data));
-             toast("thêm thành công",{
-                    onClose: () =>navigate("/admin")
+             toast("cập nhập sản phẩm thành công",{
+                    onClose: () =>navigate("/admin/product")
                 });
             })
           })
         }else{
           dispatch(editProduct(data));
-          toast("thêm thành công",{
-            onClose: () =>navigate("/admin")
+          toast("cập nhập sản phẩm thành công",{
+            onClose: () =>navigate("/admin/product")
         });
         }
       };

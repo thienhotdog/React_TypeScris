@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getOrder } from "../../slide/order";
-import { Link } from "react-router-dom";
-import { IProduct } from "../../model/product";
+import { getOrder } from "../../../slide/order";
+import { IProduct } from "../../../model/product";
 
 const OrderDetail = () => {
     const { id } = useParams();
@@ -23,11 +22,10 @@ const OrderDetail = () => {
                         <th scope="col"> #</th>
                         <th scope="col">Tên</th>
                         <th scope="col">ảnh</th>
+                        <th scope="">số lượng</th>
                         <th scope="col">Giá</th>
                     </tr>
                 </thead>
-                {/* <tbody>
-                        // { */}
                 {(order) ? (
                     <tbody>
                         {order.products.map((item:IProduct, index:number) => (
@@ -35,6 +33,7 @@ const OrderDetail = () => {
                                 <td>{index + 1}</td>
                                 <td>{item.name}</td>
                                 <td><img src={item.img} className="shop-img" /></td>
+                                <td>{item.cartQuantity}</td>
                                 <td>{item.price}</td>
                             </tr>
                         ))}
@@ -42,7 +41,6 @@ const OrderDetail = () => {
                 ) : (
                     <tbody></tbody>
                 )}
-                {/* // </tbody> */}
             </table>
         </div>
     )
